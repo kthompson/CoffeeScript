@@ -12,42 +12,50 @@ namespace CoffeeScript
     {
         public static void Dump(MethodInfo m)
         {
-            var dm = ILReaderFactory.GetDynamicMethod(m);
-            var il = dm.GetILGenerator();
-            var reader = ILReaderFactory.Create(m);
-            //reader.InstructionBytes
-            var asmFileName = "temp.dll";
+			try
+			{
+	            var dm = ILReaderFactory.GetDynamicMethod(m);
+	            var il = dm.GetILGenerator();
+	            var reader = ILReaderFactory.Create(m);
+	            //reader.InstructionBytes
+	            var asmFileName = "temp.dll";
 
-            var myAsmName = new AssemblyName {Name = "MyDynamicAssembly"};
+	            var myAsmName = new AssemblyName {Name = "MyDynamicAssembly"};
 
-            AssemblyBuilder myAsmBldr = AppDomain.CurrentDomain.DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.RunAndSave);
-            
-            // We've created a dynamic assembly space - now, we need to create a module 
-            // within it to reflect the type Point into.
+	            AssemblyBuilder myAsmBldr = AppDomain.CurrentDomain.DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.RunAndSave);
+	            
+	            // We've created a dynamic assembly space - now, we need to create a module 
+	            // within it to reflect the type Point into.
 
-            ModuleBuilder myModuleBldr = myAsmBldr.DefineDynamicModule(asmFileName, asmFileName);
-            
-            TypeBuilder myTypeBldr = myModuleBldr.DefineType("TempClass");
+	            ModuleBuilder myModuleBldr = myAsmBldr.DefineDynamicModule(asmFileName, asmFileName);
+	            
+	            TypeBuilder myTypeBldr = myModuleBldr.DefineType("TempClass");
 
-            // Build the constructor.
-            
+	            // Build the constructor.
+	            
 
-            MethodBuilder methodBldr = myTypeBldr.DefineMethod(dm.Name, MethodAttributes.Public | MethodAttributes.Static);
-            var parameters = dm.GetParameters();
-            methodBldr.SetReturnType(dm.ReturnType);
-            methodBldr.SetParameters(parameters.Select(p=> p.ParameterType).ToArray());
-            
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                var p = parameters[i];
-                methodBldr.DefineParameter(i + 1, p.Attributes, p.Name ?? "p" + i);
-            }
+	            MethodBuilder methodBldr = myTypeBldr.DefineMethod(dm.Name, MethodAttributes.Public | MethodAttributes.Static);
+	            var parameters = dm.GetParameters();
+	            methodBldr.SetReturnType(dm.ReturnType);
+	            methodBldr.SetParameters(parameters.Select(p=> p.ParameterType).ToArray());
+	            
+	            for (int i = 0; i < parameters.Length; i++)
+	            {
+	                var p = parameters[i];
+	                methodBldr.DefineParameter(i + 1, p.Attributes, p.Name ?? "p" + i);
+	            }
 
-            methodBldr.CreateMethodBody(reader.InstructionBytes, reader.InstructionBytes.Length);
-            
-            myTypeBldr.CreateType();
+	            methodBldr.CreateMethodBody(reader.InstructionBytes, reader.InstructionBytes.Length);
+	            
+	            myTypeBldr.CreateType();
 
-            myAsmBldr.Save(asmFileName);
+	            myAsmBldr.Save(asmFileName);
+			}
+			catch(Exception exception)
+			{
+				//TODO: See if we can get this working for Mono
+				Trace.WriteLine ("MethodDumper.Dump Exception: " + exception.ToString ());
+			}
         }
 
 
