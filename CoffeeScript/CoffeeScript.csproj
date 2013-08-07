@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{635BE1FA-355F-4FF4-BB4C-97036145E6A0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoffeeScript</RootNamespace>
+    <AssemblyName>CoffeeScript</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CoffeeParseTreeReader.cs" />
+    <Compile Include="CoffeeScript.cs" />
+    <Compile Include="Binders\CoffeeScriptBinaryOperationBinder.cs" />
+    <Compile Include="Binders\CoffeeScriptCreateInstanceBinder.cs" />
+    <Compile Include="Binders\CoffeeScriptGetMemberBinder.cs" />
+    <Compile Include="Binders\CoffeeScriptInvokeBinder.cs" />
+    <Compile Include="Binders\CoffeeScriptInvokeMemberBinder.cs" />
+    <Compile Include="CoffeeScriptModule.cs" />
+    <Compile Include="Binders\CoffeeScriptUnaryOperationBinder.cs" />
+    <Compile Include="DynamicObjectHelpers.cs" />
+    <Compile Include="ExpressionCompiler.cs" />
+    <Compile Include="Binders\InvokeMemberBinderKey.cs" />
+    <Compile Include="MethodDumper.cs" />
+    <Compile Include="Nodes\Access.cs" />
+    <Compile Include="Nodes\Arr.cs" />
+    <Compile Include="Nodes\Assign.cs" />
+    <Compile Include="Nodes\Call.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Nodes\Base.cs" />
+    <Compile Include="Nodes\Block.cs" />
+    <Compile Include="Nodes\Bool.cs" />
+    <Compile Include="Nodes\Class.cs" />
+    <Compile Include="Nodes\Code.cs" />
+    <Compile Include="Nodes\Comment.cs" />
+    <Compile Include="Nodes\Existence.cs" />
+    <Compile Include="Nodes\Extends.cs" />
+    <Compile Include="Nodes\For.cs" />
+    <Compile Include="Nodes\If.cs" />
+    <Compile Include="Nodes\In.cs" />
+    <Compile Include="Nodes\Index.cs" />
+    <Compile Include="Nodes\Literal.cs" />
+    <Compile Include="Nodes\Null.cs" />
+    <Compile Include="Nodes\Obj.cs" />
+    <Compile Include="Nodes\Op.cs" />
+    <Compile Include="Nodes\Param.cs" />
+    <Compile Include="Nodes\Parens.cs" />
+    <Compile Include="Nodes\Range.cs" />
+    <Compile Include="Nodes\Return.cs" />
+    <Compile Include="Nodes\Slice.cs" />
+    <Compile Include="Nodes\Splat.cs" />
+    <Compile Include="Nodes\Switch.cs" />
+    <Compile Include="Nodes\Throw.cs" />
+    <Compile Include="Nodes\Try.cs" />
+    <Compile Include="Nodes\Undefined.cs" />
+    <Compile Include="Nodes\Value.cs" />
+    <Compile Include="Nodes\While.cs" />
+    <Compile Include="NodeUnwrapper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuntimeTypes\Function.cs" />
+    <Compile Include="RuntimeTypes\RuntimeDynamicMetaObject.cs" />
+    <Compile Include="Scope.cs" />
+    <Compile Include="Binders\CoffeeScriptSetMemberBinder.cs" />
+    <Compile Include="RuntimeTypes\TypeModel.cs" />
+    <Compile Include="RuntimeTypes\TypeModelMetaObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Documents\GitHub\mono.linq.expressions\Mono.Linq.Expressions.csproj">
+      <Project>{0c001d50-4176-45ae-bdc8-ba626508b0cc}</Project>
+      <Name>Mono.Linq.Expressions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
